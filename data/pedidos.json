@@ -1,0 +1,50 @@
+[
+  {
+    "id_pedido": "1001",
+    "fecha_compra": "2026-09-10",
+    "fecha_entrega": "2026-09-15",
+    "estado_pedido": "entregado",
+    "producto": "Taladro Inalámbrico 18V",
+    "categoria": "herramientas",
+    "cantidad": 1,
+    "tipo_entrega": "despacho",
+    "vendedor": "Sodimac",
+    "incidencia": null
+  },
+  {
+    "id_pedido": "1002",
+    "fecha_compra": "2026-09-20",
+    "fecha_entrega": "2026-09-24",
+    "estado_pedido": "atrasado",
+    "producto": "Lavadora Carga Frontal 12kg",
+    "categoria": "linea_blanca",
+    "cantidad": 1,
+    "tipo_entrega": "despacho",
+    "vendedor": "Sodimac",
+    "incidencia": "retraso_transporte"
+  },
+  {
+    "id_pedido": "1003",
+    "fecha_compra": "2026-09-22",
+    "fecha_entrega": "2026-09-27",
+    "estado_pedido": "en_tránsito",
+    "producto": "Juego de Comedor 6 Sillas",
+    "categoria": "muebles",
+    "cantidad": 1,
+    "tipo_entrega": "despacho",
+    "vendedor": "Sodimac",
+    "incidencia": null
+  },
+  {
+    "id_pedido": "1004",
+    "fecha_compra": "2026-09-18",
+    "fecha_entrega": "2026-09-21",
+    "estado_pedido": "entregado",
+    "producto": "Pintura Látex Extra Cubriente 5Gal",
+    "categoria": "pinturas",
+    "cantidad": 2,
+    "tipo_entrega": "despacho",
+    "vendedor": "Sodimac",
+    "incidencia": null
+  }
+]
