@@ -7,12 +7,12 @@ from pydantic import BaseModel, Field
 
 from groq import Groq, GroqError
 import chromadb
-
+API_KEY = os.getenv("GROQ_API_KEY")
 # Asigna la API Key desde la variable de entorno o usa la clave indicada por defecto
-API_KEY_REAL = "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"
+
 
 # Instancia el cliente directamente con la cadena
-client = Groq(api_key=API_KEY_REAL)
+client = Groq(api_key=API_KEY)
 
 # Modelo activo de Groq compatible con Structured Outputs (JSON)
 MODEL_NAME = "openai/gpt-oss-20b"
