@@ -1,0 +1,42 @@
+[
+  {
+    "ticket_id": "TCK-101",
+    "fecha": "2026-11-14 02:33:03",
+    "cliente_id": "CLI-01",
+    "id_pedido": "1002",
+    "tipo_gestion": "REPROGRAMACIÓN",
+    "prioridad": "ALTA",
+    "estado": "ABIERTO",
+    "descripcion": "Reprogramación prioritaria del pedido 1002 (Lavadora Carga Frontal 12kg). Nuevo plazo de entrega: 2026-10-01."
+  },
+  {
+    "ticket_id": "TCK-102",
+    "fecha": "2026-11-14 03:23:07",
+    "cliente_id": "CLI-01",
+    "id_pedido": "1002",
+    "tipo_gestion": "INCIDENCIA_PEDIDO_ATRASADO",
+    "prioridad": "ALTA",
+    "estado": "ABIERTO",
+    "descripcion": "Reprogramación prioritaria del pedido 1002. Se confirma envío en 24h."
+  },
+  {
+    "ticket_id": "TCK-103",
+    "fecha": "2026-11-14 03:24:16",
+    "cliente_id": "CLI-02",
+    "id_pedido": "1001",
+    "tipo_gestion": "CAMBIO",
+    "prioridad": "MEDIA",
+    "estado": "ABIERTO",
+    "descripcion": "Solicitud de devolución del taladro del pedido 1001, pero no cumple plazo de devolución. Se ofrece cambio de producto."
+  },
+  {
+    "ticket_id": "TCK-104",
+    "fecha": "2026-11-14 03:25:13",
+    "cliente_id": "CLI-03",
+    "id_pedido": "1004",
+    "tipo_gestion": "DEVOLUCION",
+    "prioridad": "MEDIA",
+    "estado": "ABIERTO",
+    "descripcion": "Solicitud de devolución de pintura (Pedido 1004)."
+  }
+]

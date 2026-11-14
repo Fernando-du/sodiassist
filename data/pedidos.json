@@ -14,14 +14,14 @@
   {
     "id_pedido": "1002",
     "fecha_compra": "2026-09-20",
-    "fecha_entrega": "2026-09-24",
-    "estado_pedido": "atrasado",
+    "fecha_entrega": "2026-10-01",
+    "estado_pedido": "reprogramado_prioritario",
     "producto": "Lavadora Carga Frontal 12kg",
     "categoria": "linea_blanca",
     "cantidad": 1,
     "tipo_entrega": "despacho",
     "vendedor": "Sodimac",
-    "incidencia": "retraso_transporte"
+    "incidencia": "reprogramacion_24h_confirmada"
   },
   {
     "id_pedido": "1003",

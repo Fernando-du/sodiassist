@@ -1,4 +1,5 @@
 import os
+import time
 from typing import Annotated, TypedDict, List
 from pydantic import BaseModel, Field
 
@@ -32,22 +33,38 @@ class AgentState(TypedDict):
 # 2. CONSTRUCCIÓN DEL GRAFO DE AGENTE (LANGGRAPH)
 # =====================================================================
 class SodiAssistGraphAgent:
-    def __init__(self, model_name: str = "llama-3.3-70b-versatile"):
+    def __init__(self, model_name: str = "openai/gpt-oss-20b", min_intervalo_segundos: int = 15):
         api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
             raise ValueError("Falta la variable de entorno GROQ_API_KEY.")
 
-        # LLM base para razonamiento y Tool Calling
+        # Control automático de tasa (Rate Limit) entre turnos
+        self.min_intervalo_segundos = min_intervalo_segundos
+        self._ultima_llamada = 0.0
+
+        # LLM base para razonamiento y Tool Calling (con reintentos automáticos ante Rate Limit)
         self.llm = ChatGroq(
             model=model_name,
             api_key=api_key,
-            temperature=0.1
+            temperature=0.1,
+            max_retries=4,
+            request_timeout=30
         )
         self.llm_with_tools = self.llm.bind_tools(ALL_TOOLS)
         self.planner_llm = self.llm.with_structured_output(PlanEjecucion)
 
         self.checkpointer = get_short_term_memory()
         self.graph = self._build_graph()
+
+    def _esperar_cuota_tpm(self):
+        """Asegura una pausa automática entre llamadas para no exceder el límite TPM de Groq."""
+        if self._ultima_llamada > 0:
+            transcurrido = time.time() - self._ultima_llamada
+            restante = self.min_intervalo_segundos - transcurrido
+            if restante > 0:
+                print(f"\n⏳ Control automático de cuota Groq: esperando {restante:.1f}s...")
+                time.sleep(restante)
+        self._ultima_llamada = time.time()
 
     def _nodo_planificador(self, state: AgentState) -> dict:
         """
@@ -132,9 +149,10 @@ INSTRUCCIONES OPERATIVAS Y DE AUTONOMÍA:
 
     def conversar(self, mensaje: str, thread_id: str = "sesion_1", cliente_id: str = "CLI-01") -> dict:
         """
-        Ejecuta un turno de conversación manteniendo la memoria de corto plazo en `thread_id`.
-        Retorna la respuesta final y el plan generado para trazabilidad.
+        Ejecuta un turno de conversación manteniendo la memoria de corto plazo en `thread_id`
+        y regulando automáticamente el tiempo entre peticiones.
         """
+        self._esperar_cuota_tpm()
         config = {"configurable": {"thread_id": thread_id}}
         resultado = self.graph.invoke(
             {
@@ -143,6 +161,7 @@ INSTRUCCIONES OPERATIVAS Y DE AUTONOMÍA:
             },
             config=config
         )
+        self._ultima_llamada = time.time()
         return {
             "plan": resultado.get("plan_actual", ""),
             "respuesta": resultado["messages"][-1].content
