@@ -15,7 +15,7 @@
     "id_pedido": "1002",
     "fecha_compra": "2026-09-20",
     "fecha_entrega": "2026-10-01",
-    "estado_pedido": "reprogramado_prioritario",
+    "estado_pedido": "atrasado",
     "producto": "Lavadora Carga Frontal 12kg",
     "categoria": "linea_blanca",
     "cantidad": 1,
